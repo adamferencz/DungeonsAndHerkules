@@ -1,11 +1,14 @@
 class Player {
   PVector position, velocity;
-  float size;
+  float size, hp;
+  HpBar hpbar;
 
   Player() {
     position = new PVector(width/2, height/2);
     velocity = new PVector(0, 0);
     size = 100;
+    hp = 100;
+    hpbar = new HpBar(hp);
   }
 
   void display() {
@@ -14,7 +17,9 @@ class Player {
     circle(position.x, position.y, size);
     
     //image
-    image(playerImage,position.x, position.y);
+    //image(playerImage,position.x, position.y);
+    
+    hpbar.run(hp);
   }
 
 void border() {
