@@ -4,13 +4,15 @@ Player player;
 ArrayList<Spawner> spawners;
 ArrayList<Enemy> enemies;
 ArrayList <Bullet> bullets ;
+Pet pet;
 
 boolean [] keys = new boolean[128];
-PImage playerImage, enemyImage;
+PImage playerImage, enemyImage, petImage;;
 
 void setup() {
   size(920, 560);
   player = new Player();
+  pet = new Pet();
 
   spawners = new ArrayList<Spawner>();
   enemies = new ArrayList<Enemy>();
@@ -22,6 +24,7 @@ void setup() {
 
   playerImage = loadImage("images\\data\\player\\playerTWOdown.png");
   enemyImage = loadImage("images\\data\\enemy\\basic\\enemyTHREE.png");
+  petImage = loadImage("images\\data\\pet\\petFIVEleft1.png");
 }
 
 void draw() {
@@ -29,6 +32,9 @@ void draw() {
   imageMode(CENTER);
   player.move();
   player.display();
+  
+  pet.move();
+  pet.display();
 
   for (int i = bullets.size()-1; i >= 0; i--) {
     Bullet b = bullets.get(i);
