@@ -31,5 +31,11 @@ class Bullet {
     } else return false;
   }
   
-  //todo despawn
+  boolean despawn() {
+    if (position.x < -d || position.x > width+d || position.y < -d || position.y > height+d ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

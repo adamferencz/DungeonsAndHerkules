@@ -1,4 +1,4 @@
-//Verze 2
+//Verze 3
 
 Player player;
 ArrayList<Spawner> spawners;
@@ -25,7 +25,7 @@ void setup() {
 }
 
 void draw() {
-  background(0);
+  background(255);
   imageMode(CENTER);
   player.move();
   player.display();
@@ -39,7 +39,11 @@ void draw() {
       Enemy e = enemies.get(j);
       if (b.hit(e.position, e.d)) {
         bullets.remove(i);
+        break;
       }
+    }
+    if (b.despawn()) {
+      bullets.remove(i);
     }
   }
 
