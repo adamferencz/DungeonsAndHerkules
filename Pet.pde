@@ -35,7 +35,18 @@ class Pet {
     return winner;
   }
 
-
+  void killEnemy(){
+    for (int i = enemies.size()-1; i >= 0; i--) {
+      Enemy e = enemies.get(i);
+      float d = dist(e.position.x, e.position.y, position.x, position.y);
+      if (d<e.d+size) {
+        enemies.remove(i);
+        break; 
+      }
+    }
+  }
+  
+  
   void move() {
     //detectEnemy();
     Enemy detected = detectEnemy();
@@ -64,8 +75,11 @@ class Pet {
     noFill();
     circle(position.x, position.y, size);
     image(petImage, position.x, position.y);
+    //todo animate();
 
     //display range
     circle(position.x, position.y, range);
   }
 }
+
+//todo class Dog extends Pet{}

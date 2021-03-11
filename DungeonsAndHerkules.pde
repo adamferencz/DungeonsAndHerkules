@@ -34,6 +34,7 @@ void draw() {
   player.display();
   
   pet.move();
+  pet.killEnemy(); 
   pet.display();
 
   for (int i = bullets.size()-1; i >= 0; i--) {
