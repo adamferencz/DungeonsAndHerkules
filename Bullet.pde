@@ -1,6 +1,6 @@
 class Bullet {
   PVector position, velocity, mouse;
-  float d, angel;
+  float d, angel, damage;
 
   Bullet(PVector pos, float a) {
     d = 10; 
@@ -13,6 +13,7 @@ class Bullet {
     velocity = PVector.sub(mouse, position);
     velocity.rotate(a);
     velocity.setMag(10);
+    damage = 1;
   }
 
   void display() {

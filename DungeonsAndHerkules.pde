@@ -88,7 +88,5 @@ void keyReleased() {
 }
 
 void mousePressed() {
-  bullets.add(new Bullet(player.position, 0));
-  bullets.add(new Bullet(player.position, 5));
-  bullets.add(new Bullet(player.position, -5));
+  player.shoot();
 }
