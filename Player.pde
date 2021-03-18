@@ -17,7 +17,7 @@ class Player {
     circle(position.x, position.y, size);
     
     //image
-    //image(playerImage,position.x, position.y);
+    image(playerImage,position.x, position.y);
     
     hpbar.run(hp);
   }

@@ -49,7 +49,7 @@ class Enemy {
     ellipse(position.x, position.y, d, d);
 
     //image
-    //image(enemyImage, position.x, position.y);
+    image(enemyImage, position.x, position.y);
   }
   
   void hitPlayer(PVector pos_, float d_) {

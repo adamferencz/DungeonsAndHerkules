@@ -10,7 +10,7 @@ boolean [] keys = new boolean[128];
 PImage playerImage, enemyImage, petImage;;
 
 void setup() {
-  size(920, 560);
+  size(1024, 720);
   player = new Player();
   pet = new Pet();
 
@@ -25,6 +25,7 @@ void setup() {
   playerImage = loadImage("images\\data\\player\\playerTWOdown.png");
   enemyImage = loadImage("images\\data\\enemy\\basic\\enemyTHREE.png");
   petImage = loadImage("images\\data\\pet\\petFIVEleft1.png");
+  
 }
 
 void draw() {

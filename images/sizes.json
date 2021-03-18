@@ -1,0 +1,12 @@
+{
+    "__comment__": "Pište hodnoty pro šířku obrázků",
+    "basic enemy": 100, 
+    "boss enemy": 200,
+    "medium enemy": 150, 
+    "pet": 100, 
+    "player": 200, 
+    "ui": 50, 
+    "basic weapon": 100, 
+    "medium weapon": 100, 
+    "ultimate weapon": 100
+  }

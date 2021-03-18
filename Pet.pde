@@ -58,14 +58,14 @@ class Pet {
 
     acc = PVector.sub(target, position);
     acc.normalize();
-    acc.mult(0.3);
+    acc.mult(0.5);
     // accToTarget = PVector.sub(target, position);  
     //accToTarget.setMag(0.1);
     //applyForce(accToTarget);
 
     //update velocity
     velocity.add(acc);
-    velocity.limit(2.5);
+    velocity.limit(3.5);
 
     // Add the current speed to the location.
     position.add(velocity);
