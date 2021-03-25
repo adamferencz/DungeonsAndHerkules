@@ -7,6 +7,7 @@ class Enemy {
   color c;
   float maxHP, nowHP;
   boolean alive;
+  HpBar hpbar;
   
 
   Enemy(PVector origin) {
@@ -21,6 +22,7 @@ class Enemy {
     alive = true;
     maxHP = 10;
     nowHP = maxHP;
+    hpbar = new HpBar(maxHP);
   }
   
   void gotDamage(float damage){
@@ -54,38 +56,38 @@ class Enemy {
     }
   }
   
-  void healthBar() {
-    rectMode (CORNER);
-    strokeWeight(2);
-    float onePercentOfHP = maxHP/100;
-    float howManyTimes = 100/onePercentOfHP;
-    float defernceBetweenHPs = maxHP - nowHP;
-    float HPStill = (onePercentOfHP*howManyTimes) - (defernceBetweenHPs/onePercentOfHP);
-    stroke (0);
-    noFill();
-    fill (255);
-    rect(position.x - 45, position.y + 95, 100, 10);
-    if (nowHP <= 23) {
-      fill (255, 0, 0);
-    } else {
-      if (nowHP <= 33) {
-        fill (255, 106, 0);
-      } else {
-        if (nowHP <=50) {
-          fill (255, 216, 0);
-        } else {
-          if (nowHP <= 67) {
-            fill (241, 245, 59);
-          } else {
-            if (nowHP > 67) {
-              fill (94, 255, 97);
-            }
-          }
-        }
-      }
-    }
-    rect(position.x - 45, position.y + 95, HPStill, 10);
-  }
+  //void healthBar() {
+  //  rectMode (CORNER);
+  //  strokeWeight(2);
+  //  float onePercentOfHP = maxHP/100;
+  //  float howManyTimes = 100/onePercentOfHP;
+  //  float defernceBetweenHPs = maxHP - nowHP;
+  //  float HPStill = (onePercentOfHP*howManyTimes) - (defernceBetweenHPs/onePercentOfHP);
+  //  stroke (0);
+  //  noFill();
+  //  fill (255);
+  //  rect(position.x - 45, position.y + 95, 100, 10);
+  //  if (nowHP <= 23) {
+  //    fill (255, 0, 0);
+  //  } else {
+  //    if (nowHP <= 33) {
+  //      fill (255, 106, 0);
+  //    } else {
+  //      if (nowHP <=50) {
+  //        fill (255, 216, 0);
+  //      } else {
+  //        if (nowHP <= 67) {
+  //          fill (241, 245, 59);
+  //        } else {
+  //          if (nowHP > 67) {
+  //            fill (94, 255, 97);
+  //          }
+  //        }
+  //      }
+  //    }
+  //  }
+  //  rect(position.x - 45, position.y + 95, HPStill, 10);
+  //}
   
   void display() {
 
@@ -96,7 +98,7 @@ class Enemy {
     //image
     image(enemyImage, position.x, position.y);
     
-    healthBar();
+    hpbar.run(nowHP, position.x - 5,position.y + 70, 4);
   }
   
   void hitPlayer(PVector pos_, float d_) {

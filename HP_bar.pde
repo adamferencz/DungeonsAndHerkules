@@ -1,41 +1,58 @@
 class HpBar {
-  float x, y, max;
+  float max;
 
 
   HpBar(float max_) {
-    x = width/2;
-    y = height-50;
     max = max_;
   }
 
 
-  void run(float hp_) {
-    push();  
+  void run(float hp_, float x, float y, float devidet) {
+    push();
     float w = 500;
     float hp = hp_;
     if (hp < 0) hp = 0;
     float xload = map(hp, 0, max, -w/2, w/2);
     float wload = map(xload, -w/2, w/2, w, 0);
-    translate(x, y);
+    float proc = hp/max *100;
+    translate(x,y);
 
     rectMode(CENTER);
 
     noStroke();
-    fill(0, 255, 0);
-    rect(0, 0, w, 25, 255);
+
+    if (proc <= 23) {
+      fill (255, 0, 0);
+    } else {
+      if (proc <= 33) {
+        fill (255, 106, 0);
+      } else {
+        if (proc <=50) {
+          fill (255, 216, 0);
+        } else {
+          if (proc <= 67) {
+            fill (241, 245, 59);
+          } else {
+            if (proc > 67) {
+              fill(0, 255, 0);
+            }
+          }
+        }
+      }
+    }
+
+    rect(0, 0, w/devidet, 25/devidet, 255);
 
     noStroke();
     rectMode(CORNER);
     fill(255, 255, 255);
-    rect(xload, -12, wload, 25);
+    rect(xload/devidet, -12/devidet, wload/devidet, 25/devidet);
 
     rectMode(CENTER);
     strokeWeight(2);
     stroke(0);
     noFill();
-    rect(0, 0, w, 25, 255);
-
-
+    rect(0, 0, w/devidet, 25/devidet, 255);
 
     pop();
   }

@@ -32,7 +32,7 @@ class Shotgun extends Weapon{
     PVector velocity = PVector.sub(mouse, pos);
     
     //bullets.add(new Bullet(pos.add(velocity).add(velocity), 0));
-    bullets.add(new Bullet(pos.add(velocity), 0));
+    //bullets.add(new Bullet(pos.add(velocity), 0));
     bullets.add(new Bullet(pos, 0));
   }
   
