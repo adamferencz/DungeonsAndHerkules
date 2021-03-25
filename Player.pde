@@ -1,6 +1,7 @@
 class Player {
   PVector position, velocity;
   Weapon selectedWeapon;
+  int selectedWeaponNumber;
   ArrayList<Weapon> weapons;
   float size, hp;
   HpBar hpbar;
@@ -13,10 +14,32 @@ class Player {
     hpbar = new HpBar(hp);
     weapons = new ArrayList<Weapon>();
     weapons.add(new Weapon());
-    selectedWeapon = weapons.get(0);
+    weapons.add(new Shotgun());
+    weapons.add(new Shotgun());
+    weapons.add(new Weapon());
+    weapons.add(new Weapon());
+    weapons.add(new Weapon());
+    selectedWeaponNumber = 0;
+    selectedWeapon = weapons.get(selectedWeaponNumber);
     
   }
-
+  
+  void changeGun(int change){
+    if (change == 1){
+      selectedWeaponNumber++;
+      if(weapons.size() == selectedWeaponNumber){
+        selectedWeaponNumber = 0;
+      }
+      selectedWeapon = weapons.get(selectedWeaponNumber);
+    } else {
+      selectedWeaponNumber--;
+      if(selectedWeaponNumber < 0){
+        selectedWeaponNumber = weapons.size() - 1;
+      }
+      selectedWeapon = weapons.get(selectedWeaponNumber);
+    }
+  }
+  
   void display() {
     //hitbox
     noFill();
@@ -26,6 +49,9 @@ class Player {
     image(playerImage, position.x, position.y);
 
     hpbar.run(hp);
+    fill(0);
+    textSize(30);
+    text(selectedWeaponNumber, 10, height - 20);
   }
 
   void border() {

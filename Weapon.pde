@@ -19,7 +19,19 @@ class Weapon{
   }
 }
 
-//class Shotgun extends Weapon{
+class Shotgun extends Weapon{
+  Shotgun(){
+    super();
+  }
   
+  void shoot(){
+    bullets.add(new Bullet(player.position, 0));
+    bullets.add(new Bullet(player.position, 20));
+    bullets.add(new Bullet(player.position, -20));
+    bullets.add(new Bullet(player.position, 10));
+    bullets.add(new Bullet(player.position, -10));
+    bullets.add(new Bullet(player.position, 5));
+    bullets.add(new Bullet(player.position, -5));
+  }
   
-//}
+}

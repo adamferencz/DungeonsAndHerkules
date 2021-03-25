@@ -34,9 +34,9 @@ void draw() {
   player.move();
   player.display();
   
-  pet.move();
-  pet.killEnemy(); 
-  pet.display();
+  //pet.move();
+  //pet.killEnemy(); 
+  //pet.display();
 
   for (int i = bullets.size()-1; i >= 0; i--) {
     Bullet b = bullets.get(i);
@@ -89,4 +89,9 @@ void keyReleased() {
 
 void mousePressed() {
   player.shoot();
+}
+
+void mouseWheel(MouseEvent event) {
+  float direction = event.getCount();
+  player.changeGun(int(direction));
 }
