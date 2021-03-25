@@ -15,10 +15,8 @@ class Player {
     weapons = new ArrayList<Weapon>();
     weapons.add(new Weapon());
     weapons.add(new Shotgun());
-    weapons.add(new Shotgun());
-    weapons.add(new Weapon());
-    weapons.add(new Weapon());
-    weapons.add(new Weapon());
+    weapons.add(new ToiletBellGun());
+    weapons.add(new GrenadeLauncher());
     selectedWeaponNumber = 0;
     selectedWeapon = weapons.get(selectedWeaponNumber);
     

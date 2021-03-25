@@ -16,9 +16,22 @@ class Bullet {
     damage = 1;
   }
 
+
   void display() {
     fill(0, 255, 255); 
     ellipse(position.x, position.y, d, d);
+
+    PVector zero = new PVector(-1, 0);
+    float an = PVector.angleBetween(velocity, zero); 
+    push();
+    translate(position.x, position.y);
+    if (velocity.y < 0) rotate(an);
+    if (velocity.y > 0) rotate(-an);
+    if (velocity.y == 0 && velocity.x > 0) {
+      rotate(PI);
+    }
+    //image(bulletImage, 0, 0);
+    pop();
   }
 
   void move() {
@@ -39,4 +52,56 @@ class Bullet {
       return false;
     }
   }
+  
+  void onHit(){
+    
+  }
+}
+
+class ToiletBell extends Bullet {
+  ToiletBell(PVector pos, float a) {
+    super(pos, a);
+  }
+  void display() {
+    PVector zero = new PVector(-1, 0);
+    float an = PVector.angleBetween(velocity, zero); 
+    push();
+    translate(position.x, position.y);
+    if (velocity.y < 0) rotate(an);
+    if (velocity.y > 0) rotate(-an);
+    if (velocity.y == 0 && velocity.x > 0) {
+      rotate(PI);
+    }
+    image(bulletImage, 0, 0);
+    pop();
+  }
+}
+
+
+class Grenade extends Bullet{
+  Grenade(PVector pos, float a) {
+    super(pos, a);
+  }
+  
+  void onHit(){
+    bullets.add(new Lentil(position, -30));
+    bullets.add(new Lentil(position, -60));
+    bullets.add(new Lentil(position, -90));
+    bullets.add(new Lentil(position, -120));
+    bullets.add(new Lentil(position, -150));
+    bullets.add(new Lentil(position, -180));
+    bullets.add(new Lentil(position, 0));
+    bullets.add(new Lentil(position, 30));
+    bullets.add(new Lentil(position, 60));
+    bullets.add(new Lentil(position, 90));
+    bullets.add(new Lentil(position, 120));
+    bullets.add(new Lentil(position, 150));
+  }
+}
+
+class Lentil extends Bullet{
+  Lentil(PVector pos, float a) {
+    super(pos, a);
+  }
+  
 }

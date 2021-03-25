@@ -7,7 +7,7 @@ ArrayList <Bullet> bullets ;
 Pet pet;
 
 boolean [] keys = new boolean[128];
-PImage playerImage, enemyImage, petImage;;
+PImage playerImage, enemyImage, petImage, bulletImage;
 
 void setup() {
   size(1024, 720);
@@ -25,6 +25,7 @@ void setup() {
   playerImage = loadImage("images\\data\\player\\playerTWOdown.png");
   enemyImage = loadImage("images\\data\\enemy\\basic\\enemyTHREE.png");
   petImage = loadImage("images\\data\\pet\\petFIVEleft1.png");
+  bulletImage = loadImage("images\\data\\weapon\\ammo\\ammoTWOmed.png");
   
 }
 
@@ -46,7 +47,10 @@ void draw() {
     for (int j = enemies.size()-1; j >= 0; j--) {
       Enemy e = enemies.get(j);
       if (b.hit(e.position, e.d)) {
-        bullets.remove(i);
+        e.gotDamage(b.damage);
+        b.onHit();
+        bullets.remove(i);//fixme for toilet bell
+        if (e.alive == false) enemies.remove(j);
         break;
       }
     }
