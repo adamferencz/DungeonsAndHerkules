@@ -35,18 +35,18 @@ class Pet {
     return winner;
   }
 
-  void killEnemy(){
+  void killEnemy() {
     for (int i = enemies.size()-1; i >= 0; i--) {
       Enemy e = enemies.get(i);
       float d = dist(e.position.x, e.position.y, position.x, position.y);
       if (d<e.d+size) {
         enemies.remove(i);
-        break; 
+        break;
       }
     }
   }
-  
-  
+
+
   void move() {
     //detectEnemy();
     Enemy detected = detectEnemy();
@@ -65,21 +65,70 @@ class Pet {
 
     //update velocity
     velocity.add(acc);
-    velocity.limit(3.5);
+    velocity.limit(2.5);
+
 
     // Add the current speed to the location.
-    position.add(velocity);
-    acc.mult(0);
+    float p = dist(player.position.x, player.position.y, position.x, position.y);
+    if (p < 130 && enemies.size() < 1) {
+    } else {
+      position.add(velocity);
+      acc.mult(0);
+    }
   }
+
   void display () {
     noFill();
-    circle(position.x, position.y, size);
-    image(petImage, position.x, position.y);
+
+    float p = dist(player.position.x, player.position.y, position.x, position.y);
+    if (p < 130 && enemies.size() < 1) { 
+      //circle(position.x, position.y, size);
+      image(petImage1, position.x, position.y);
+    } else {
+      //circle(position.x, position.y, size);
+      //image(petImage, position.x, position.y);
+      if (pet.velocity.x < 0) {
+        animation.display(position.x, position.y);
+      } else {
+        animationR.display(position.x, position.y);
+      }
+    }
+
     //todo animate();
 
     //display range
-    circle(position.x, position.y, range);
+    //circle(position.x, position.y, range);
   }
 }
 
-//todo class Dog extends Pet{}
+
+class PETanimation {
+  PImage[]images;
+  int imageCount;
+  int frame;
+  int time;
+  PETanimation(String imagePrefix, int count) {
+    imageCount = count;
+    images = new PImage[imageCount];
+    for (int i = 0; i < imageCount; i++) {
+      print (pet.velocity.x);
+      String filename = imagePrefix + i + ".png";
+      images[i] = loadImage("images\\data\\pet\\"+filename);
+    }
+    time = 1;
+  }
+
+  void display(float xpos, float ypos) {
+    time ++;
+
+    if (time%8==0) {
+      frame = (frame+1) % imageCount;
+      time = 0;
+    }  
+    image(images[frame], xpos, ypos);
+  }
+
+  int getWidth() {
+    return images[0].width;
+  }
+}

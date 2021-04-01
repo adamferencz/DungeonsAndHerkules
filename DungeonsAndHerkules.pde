@@ -1,19 +1,28 @@
-//Verze 3
+//Verze 4
 
 Player player;
 ArrayList<Spawner> spawners;
 ArrayList<Enemy> enemies;
 ArrayList <Bullet> bullets ;
 Pet pet;
+PETanimation animation, animationR;
+
+
 
 boolean [] keys = new boolean[128];
-PImage playerImage, enemyImage, petImage, bulletImage;
+PImage playerImage, enemyImage, bulletImage;
+PImage petImage, petImage1;
 
 void setup() {
   size(1024, 720);
+  
+  //objects
   player = new Player();
   pet = new Pet();
-
+  animation = new PETanimation("petFIVEleft", 2);
+  animationR = new PETanimation("petFIVEright", 2);//2 = pocet obr na animaci
+  
+  //arrayLists
   spawners = new ArrayList<Spawner>();
   enemies = new ArrayList<Enemy>();
   bullets = new ArrayList <Bullet> ();
@@ -21,12 +30,13 @@ void setup() {
   for (int i = 0; i < 3; i++) {//fixme
     spawners.add(new Spawner());
   }
-
+  
+  //images
   playerImage = loadImage("images\\data\\player\\playerTWOdown.png");
   enemyImage = loadImage("images\\data\\enemy\\basic\\enemyTHREE.png");
   petImage = loadImage("images\\data\\pet\\petFIVEleft1.png");
   bulletImage = loadImage("images\\data\\weapon\\ammo\\ammoTWOmed.png");
-  
+  petImage1 = loadImage("images\\data\\pet\\petFIVEsitting.png");
 }
 
 void draw() {
@@ -35,9 +45,9 @@ void draw() {
   player.move();
   player.display();
   
-  //pet.move();
-  //pet.killEnemy(); 
-  //pet.display();
+  pet.move();
+  pet.killEnemy(); 
+  pet.display();
 
   for (int i = bullets.size()-1; i >= 0; i--) {
     Bullet b = bullets.get(i);

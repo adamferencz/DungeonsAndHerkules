@@ -84,18 +84,18 @@ class Grenade extends Bullet{
   }
   
   void onHit(){
-    bullets.add(new Lentil(position, -30));
-    bullets.add(new Lentil(position, -60));
-    bullets.add(new Lentil(position, -90));
-    bullets.add(new Lentil(position, -120));
-    bullets.add(new Lentil(position, -150));
-    bullets.add(new Lentil(position, -180));
-    bullets.add(new Lentil(position, 0));
-    bullets.add(new Lentil(position, 30));
-    bullets.add(new Lentil(position, 60));
-    bullets.add(new Lentil(position, 90));
-    bullets.add(new Lentil(position, 120));
-    bullets.add(new Lentil(position, 150));
+    bullets.add(new Grenade(position, -30));
+    bullets.add(new Grenade(position, -60));
+    bullets.add(new Grenade(position, -90));
+    bullets.add(new Grenade(position, -120));
+    bullets.add(new Grenade(position, -150));
+    bullets.add(new Grenade(position, -180));
+    bullets.add(new Grenade(position, 0));
+    bullets.add(new Grenade(position, 30));
+    bullets.add(new Grenade(position, 60));
+    bullets.add(new Grenade(position, 90));
+    bullets.add(new Grenade(position, 120));
+    bullets.add(new Grenade(position, 150));
   }
 }
 
