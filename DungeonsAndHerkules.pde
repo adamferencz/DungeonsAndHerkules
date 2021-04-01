@@ -1,6 +1,7 @@
 //Verze 4
 
 Player player;
+int level;
 ArrayList<Spawner> spawners;
 ArrayList<Enemy> enemies;
 ArrayList <Bullet> bullets ;
@@ -15,6 +16,7 @@ PImage petImage, petImage1;
 
 void setup() {
   size(1024, 720);
+  level = 1;
   
   //objects
   player = new Player();
@@ -26,10 +28,6 @@ void setup() {
   spawners = new ArrayList<Spawner>();
   enemies = new ArrayList<Enemy>();
   bullets = new ArrayList <Bullet> ();
-
-  for (int i = 0; i < 3; i++) {//fixme
-    spawners.add(new Spawner());
-  }
   
   //images
   playerImage = loadImage("images\\data\\player\\playerTWOdown.png");
@@ -41,6 +39,13 @@ void setup() {
 
 void draw() {
   background(255);
+
+  if (spawners.size() == 0){
+    textSize(10);
+    fill(0);
+    text("LVL: " + level + " Press E to continue..", 10, width - 10);
+  }
+
   imageMode(CENTER);
   player.move();
   player.display();
@@ -70,8 +75,17 @@ void draw() {
   }
 
 
-  for (Spawner spawner : spawners) {
-    spawner.display();
+
+  for (int i = spawners.size()-1; i >= 0; i--) {
+    Spawner s = spawners.get(i);
+    s.spawn();
+    s.display();
+    if(s.empty == true){
+      spawners.remove(i);
+      if (spawners.size() == 0){
+        level++;
+      }
+    }
   }
   
   for (int i = enemies.size()-1; i >= 0; i--) {
@@ -89,9 +103,7 @@ void keyPressed() {
   }
   
   if (keys['e'] || keys['E']) {
-    for (Spawner spawner : spawners) { //fixme     
-        spawner.spawn();      
-    }
+    startWave(); //<>//
   }
 }
 
