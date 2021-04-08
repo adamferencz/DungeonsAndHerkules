@@ -13,13 +13,21 @@ class Spawner {
         switch(id) {
             case 1 :
             cooldown = 120;
-            enemiesMagazine.add(new Enemy(position.copy()));
-            enemiesMagazine.add(new Enemy(position.copy()));
-            enemiesMagazine.add(new Enemy(position.copy()));
+            enemiesMagazine.add(new BasicEnemy3(position.copy()));
+            // enemiesMagazine.add(new BasicEnemy1(position.copy()));
+            // enemiesMagazine.add(new BasicEnemy1(position.copy()));
+            // enemiesMagazine.add(new BasicEnemy1(position.copy()));
             break;
             case 2 :
-            cooldown = 30; 
-            addMoreEnemies(new Enemy(position.copy()), 10);
+            cooldown = 20; 
+            addMoreEnemies(new BasicEnemy1(position.copy()), 10);
+            break;
+            case 3 :
+            addMoreEnemies(new BasicEnemy3(position.copy()), 5);
+            break;
+            case 4 :
+            addMoreEnemies(new BasicEnemy1(position.copy()), 5);
+            addMoreEnemies(new BasicEnemy3(position.copy()), 5);
             break;
             default:
             cooldown = 30; 
@@ -30,8 +38,7 @@ class Spawner {
     
     void addMoreEnemies(Enemy enemy, int count) {
         for (int i = 0; i < count;i++) {
-            Enemy newEnemy = enemy.clone();
-            enemiesMagazine.add(newEnemy);
+            enemiesMagazine.add(enemy.clone());
         }
     }   
     
@@ -46,7 +53,6 @@ class Spawner {
                 empty = true;
             }          
         }
-        
     }
     
     void display() {

@@ -5,14 +5,13 @@ class Enemy {
     PVector accToTarget;
     float d, damage, attackSpeed, attackCooldown;
     color c;
-    float maxHP, nowHP;
+    float maxHP, nowHP, speedLimit, friction;
     boolean alive;
     HpBar hpbar;
     
-    
     Enemy(PVector origin) {
         position = origin;
-        velocity = new PVector(2.5, 5);
+        velocity = new PVector(random( - 5,5), random( - 5,5));
         acc = new PVector(0, 0);
         d = 16;
         c = #FF2E4E;
@@ -23,11 +22,13 @@ class Enemy {
         maxHP = 10;
         nowHP = maxHP;
         hpbar = new HpBar(maxHP);
+        speedLimit = 5;
+        friction = 0.95;
     }
     
     Enemy clone() {
         Enemy newEnemy = new Enemy(position.copy());
-        newEnemy.velocity = new PVector(random(-5,5), random(-5,5));
+        newEnemy.velocity = new PVector(random( - 5,5), random( - 5,5));
         return newEnemy;
     }
     
@@ -50,50 +51,20 @@ class Enemy {
         
         //update velocity
         velocity.add(acc);
-        velocity.limit(2);
+        velocity.limit(speedLimit);
         
         // Add the current speed to the location.
         position.add(velocity);
         acc.mult(0);
+
+        // Friction slowdown 
+        velocity.mult(friction);
         
         //attack cooldown
         if (attackCooldown < attackSpeed) {
             attackCooldown++;
         }
     }
-    
-    //void healthBar() {
-    // rectMode (CORNER);
-    // strokeWeight(2);
-    // float onePercentOfHP = maxHP/100;
-    // float howManyTimes = 100/onePercentOfHP;
-    // float defernceBetweenHPs = maxHP - nowHP;
-    // float HPStill = (onePercentOfHP*howManyTimes) - (defernceBetweenHPs/onePercentOfHP);
-    // stroke (0);
-    // noFill();
-    // fill (255);
-    // rect(position.x - 45, position.y + 95, 100, 10);
-    // if (nowHP <= 23) {
-    //   fill (255, 0, 0);
- //  } else {
-    //   if (nowHP <= 33) {
-    //     fill (255, 106, 0);
-    //   } else {
-    //     if (nowHP <=50) {
-    //       fill (255, 216, 0);
-    //     } else {
-    //       if (nowHP <= 67) {
-    //         fill (241, 245, 59);
-    //       } else {
-    //         if (nowHP > 67) {
-    //           fill (94, 255, 97);
-    //         }
-    //       }
-    //     }
-    //   }
- //  }
-    // rect(position.x - 45, position.y + 95, HPStill, 10);
- //}
     
     void display() {
         
@@ -102,7 +73,7 @@ class Enemy {
         ellipse(position.x, position.y, d, d);
         
         //image
-        image(enemyImage, position.x, position.y);
+        //image(enemyImage, position.x, position.y);
         
         hpbar.run(nowHP, position.x - 5,position.y + 70, 4);
     }
@@ -110,12 +81,83 @@ class Enemy {
     void hitPlayer(PVector pos_, float d_) {
         float far = dist(position.x, position.y, pos_.x, pos_.y);
         if (far < d / 2 + d_ / 2) {
-           if (attackCooldown == attackSpeed) {
+            if (attackCooldown == attackSpeed) {
                 player.hp -= damage;
                 attackCooldown = 0;
-        } 
+            } 
         }
     }
     
+}
+
+class BasicEnemy1 extends Enemy{
     
+    BasicEnemy1(PVector origin) {
+        super(origin);
+        velocity = new PVector(random( - 5,5), random( - 5,5));
+        d = 50;
+        damage = 1;
+        attackSpeed = 30;
+        maxHP = 4;
+        nowHP = maxHP;
+        hpbar = new HpBar(maxHP);
+        speedLimit = 5;
+    }
+    
+    void display() {      
+        super.display();
+        //image
+        image(basicEnemy1Image, position.x, position.y);
+    }
+    
+    BasicEnemy1 clone() {
+        BasicEnemy1 newEnemy = new BasicEnemy1(position.copy());
+        newEnemy.velocity = new PVector(random( - 5,5), random( - 5,5));
+        return newEnemy;
+    }
+}
+
+class BasicEnemy3 extends Enemy{
+    int dashCooldown, dashTimer;
+    BasicEnemy3(PVector origin) {
+        super(origin);
+        // velocity = new PVector(random(-5,5), random(-5,5));
+        // d = 50;
+        // damage = 1;
+        // attackSpeed = 30;
+        // maxHP = 4;
+        // nowHP = maxHP;
+        // hpbar = new HpBar(maxHP);
+        speedLimit = 20;
+        dashCooldown = 100;
+        dashTimer = 0;
+    }
+    
+    void display() {
+        super.display();
+        //image
+        image(basicEnemy3Image, position.x, position.y);
+    }
+    
+    BasicEnemy3 clone() {
+        BasicEnemy3 newEnemy = new BasicEnemy3(position.copy());
+        newEnemy.velocity = new PVector(random(- 5,5), random(- 5,5));
+        return newEnemy;
+    }
+    
+    void update(PVector target) {
+        super.update(target);
+        //get accToTarget
+        
+        PVector dash = PVector.sub(target, position);
+        dashTimer++;
+        if (dashTimer > dashCooldown) {
+            if (dash.mag() < 250) {
+                dashTimer = 0;
+                dash.setMag(speedLimit/2);
+                velocity.add(dash);
+                position.add(velocity);
+            } 
+        }
+    } 
 }
