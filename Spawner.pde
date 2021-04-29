@@ -3,7 +3,6 @@ class Spawner {
     ArrayList<Enemy> enemiesMagazine;
     int cooldown, timer;
     boolean empty;
-    
     Spawner(int id) {
         position = new PVector(random(width),random(height));
         empty = false;
@@ -12,7 +11,9 @@ class Spawner {
         enemiesMagazine = new ArrayList();
         switch(id) {
             case 1 :
-            cooldown = 120;
+            cooldown = 60;
+            for (int i = 0; i < 10;i++) enemiesMagazine.add(new MediumEnemy4(position.copy()));
+            
             enemiesMagazine.add(new BasicEnemy3(position.copy()));
             // enemiesMagazine.add(new BasicEnemy1(position.copy()));
             // enemiesMagazine.add(new BasicEnemy1(position.copy()));

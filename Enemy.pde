@@ -161,3 +161,72 @@ class BasicEnemy3 extends Enemy{
         }
     } 
 }
+
+class MediumEnemy3 extends Enemy{
+    int dashCooldown, dashTimer;
+    MediumEnemy3(PVector origin) {
+        super(origin);
+        // velocity = new PVector(random(-5,5), random(-5,5));
+         d = 25;
+       damage =9;
+      attackSpeed = 25;
+        speedLimit = 40;
+        dashCooldown = 26;
+        //dashTimer = 0;
+    }
+    
+    void display() {
+        super.display();
+        //image
+ image( mediumEnemy3Image , position.x, position.y);
+    }
+    
+    MediumEnemy3 clone() {
+        MediumEnemy3 newEnemy = new MediumEnemy3(position.copy());
+        newEnemy.velocity = new PVector(random(- 5,5), random(- 5,5));
+        return newEnemy;
+    }
+    
+    void update(PVector target) {
+        super.update(target);
+        //get accToTarget
+        
+        PVector dash = PVector.sub(target, position);
+        dashTimer= dashTimer+2;
+        if (dashTimer > dashCooldown) {
+            if (dash.mag() < 250) {
+                dashTimer = 0;
+                dash.setMag(speedLimit/1.5);
+                velocity.add(dash);
+                position.add(velocity);
+            } 
+        }
+    } 
+}
+
+class MediumEnemy4 extends Enemy {
+
+  MediumEnemy4(PVector origin) {
+    super(origin);
+    velocity = new PVector(random( - 5, 5), random( - 5, 5));
+    d = 50;
+    damage = 30;
+    attackSpeed = 30;
+    maxHP = 50;
+    nowHP = maxHP;
+    hpbar = new HpBar(maxHP);
+    speedLimit = 3;
+  }
+
+  void display() {      
+    super.display();
+    //image
+    image(mediumEnemy4Image, position.x, position.y);
+  }
+
+  BasicEnemy1 clone() {
+    BasicEnemy1 newEnemy = new BasicEnemy1(position.copy());
+    newEnemy.velocity = new PVector(random( - 5, 5), random( - 5, 5));
+    return newEnemy;
+  }
+}

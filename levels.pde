@@ -22,4 +22,3 @@ void startWave() {
         break;
     }
 }
-

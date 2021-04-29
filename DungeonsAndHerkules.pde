@@ -11,7 +11,10 @@ PETanimation animation, animationR;
 
 
 boolean[] keys = new boolean[128];
-PImage playerImage, basicEnemy1Image, basicEnemy3Image , bulletImage;
+PImage playerImage, bulletImage;
+PImage basicEnemy1Image, basicEnemy2Image, basicEnemy3Image;
+PImage mediumEnemy1Image, mediumEnemy2Image, mediumEnemy3Image, mediumEnemy4Image;
+PImage bossEnemy1Image, bossEnemy2Image, bossEnemy3Image, bossEnemy4Image;
 PImage petImage, petImage1;
 
 void setup() {
@@ -29,11 +32,28 @@ void setup() {
     enemies = new ArrayList<Enemy>();
     bullets = new ArrayList <Bullet> ();
     
-    //images
+    //player
     playerImage = loadImage("images\\data\\player\\playerTWOdown.png");
+
+    //basic enemy
     basicEnemy1Image = loadImage("images\\data\\enemy\\basic\\enemyONE.png");
+    basicEnemy2Image = loadImage("images\\data\\enemy\\basic\\enemyTWO.png");
     basicEnemy3Image = loadImage("images\\data\\enemy\\basic\\enemyTHREE.png");
+    //medium enemy
+    mediumEnemy1Image = loadImage("images\\data\\enemy\\medium\\enemyONE.png");
+    mediumEnemy2Image = loadImage("images\\data\\enemy\\medium\\enemyTWO.png");
+    mediumEnemy3Image = loadImage("images\\data\\enemy\\medium\\enemyTHREE.png");
+    mediumEnemy4Image = loadImage("images\\data\\enemy\\medium\\enemyFOUR.png");
+    //boss enemy
+    bossEnemy1Image = loadImage("images\\data\\enemy\\boss\\enemyONE.png");
+    bossEnemy2Image = loadImage("images\\data\\enemy\\boss\\enemyTWO.png");
+    bossEnemy3Image = loadImage("images\\data\\enemy\\boss\\enemyTHREE.png");
+    bossEnemy4Image = loadImage("images\\data\\enemy\\boss\\enemyFOUR.png");
+
+    //boss enemy
     petImage = loadImage("images\\data\\pet\\petFIVEleft1.png");
+
+    //other
     bulletImage = loadImage("images\\data\\weapon\\ammo\\ammoTWOmed.png");
     petImage1 = loadImage("images\\data\\pet\\petFIVEsitting.png");
 }
