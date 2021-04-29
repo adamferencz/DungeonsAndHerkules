@@ -6,7 +6,8 @@ class Weapon{
   Weapon(){
     ammo = 20;
     damage = 1;
-    //image;
+    image = basicWeapon1Image;
+    println(image);
   }
   
   void shoot(){
@@ -15,14 +16,18 @@ class Weapon{
     bullets.add(new Bullet(player.position, -5));
   }
   
-  void display(){
-    
+  void display(float x, float y){
+    if(image != null){
+        image(image, x, y);
+    }
   }
 }
 
 class Shotgun extends Weapon{
+  
   Shotgun(){
     super();
+    image = basicWeapon4Image;
   }
   
   void shoot(){
@@ -41,6 +46,7 @@ class Shotgun extends Weapon{
 class GrenadeLauncher extends Weapon{
   GrenadeLauncher(){
     super();
+    image = mediumWeapon1Image;
   }
   
   void shoot(){
@@ -50,8 +56,10 @@ class GrenadeLauncher extends Weapon{
 }
 
 class ToiletBellGun extends Weapon{
+  
   ToiletBellGun(){
     super();
+    image = mediumWeapon2Image;
   }
   void shoot(){
     bullets.add(new ToiletBell(player.position, 0));

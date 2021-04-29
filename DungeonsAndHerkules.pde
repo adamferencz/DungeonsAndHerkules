@@ -15,11 +15,17 @@ PImage playerImage, bulletImage;
 PImage basicEnemy1Image, basicEnemy2Image, basicEnemy3Image;
 PImage mediumEnemy1Image, mediumEnemy2Image, mediumEnemy3Image, mediumEnemy4Image;
 PImage bossEnemy1Image, bossEnemy2Image, bossEnemy3Image, bossEnemy4Image;
+
+
+PImage basicWeapon1Image,basicWeapon2Image,basicWeapon3Image,basicWeapon4Image,mediumWeapon1Image ,mediumWeapon2Image ,mediumWeapon3Image ,ultimateWeaponImage;    
+PImage basicAmmo1Image ,mediumAmmo1Image,basicAmmo2Image ,basicAmmo3Image;    
+PImage mediumShrapnel1Image  ,mediumShrapnel2Image  ,mediumShrapnel3Image  ,mediumShrapnel4Image  ,ultimateShrapnel1Image,ultimateShrapnel2Image,ultimateShrapnel3Image;
 PImage petImage, petImage1;
 
 void setup() {
     size(1024, 720);
     level = 0;
+    loadImages();
     
     //objects
     player = new Player();
@@ -32,30 +38,6 @@ void setup() {
     enemies = new ArrayList<Enemy>();
     bullets = new ArrayList <Bullet> ();
     
-    //player
-    playerImage = loadImage("images\\data\\player\\playerTWOdown.png");
-
-    //basic enemy
-    basicEnemy1Image = loadImage("images\\data\\enemy\\basic\\enemyONE.png");
-    basicEnemy2Image = loadImage("images\\data\\enemy\\basic\\enemyTWO.png");
-    basicEnemy3Image = loadImage("images\\data\\enemy\\basic\\enemyTHREE.png");
-    //medium enemy
-    mediumEnemy1Image = loadImage("images\\data\\enemy\\medium\\enemyONE.png");
-    mediumEnemy2Image = loadImage("images\\data\\enemy\\medium\\enemyTWO.png");
-    mediumEnemy3Image = loadImage("images\\data\\enemy\\medium\\enemyTHREE.png");
-    mediumEnemy4Image = loadImage("images\\data\\enemy\\medium\\enemyFOUR.png");
-    //boss enemy
-    bossEnemy1Image = loadImage("images\\data\\enemy\\boss\\enemyONE.png");
-    bossEnemy2Image = loadImage("images\\data\\enemy\\boss\\enemyTWO.png");
-    bossEnemy3Image = loadImage("images\\data\\enemy\\boss\\enemyTHREE.png");
-    bossEnemy4Image = loadImage("images\\data\\enemy\\boss\\enemyFOUR.png");
-
-    //boss enemy
-    petImage = loadImage("images\\data\\pet\\petFIVEleft1.png");
-
-    //other
-    bulletImage = loadImage("images\\data\\weapon\\ammo\\ammoTWOmed.png");
-    petImage1 = loadImage("images\\data\\pet\\petFIVEsitting.png");
 }
 
 void draw() {
@@ -64,12 +46,12 @@ void draw() {
     textSize(20);
     fill(0);
     text("LVL: " + level, 50, 50);
-    if (enemies.size() == 0) {
-      text("Press E to continue..", 50, 70);
+    if (enemies.size() == 0 && spawners.size() == 0) {
+        text("Press E to continue..", 50, 70);
     }
     imageMode(CENTER);
     player.move();
-    player.display();
+    
     
     //pet.move();
     //pet.killEnemy(); 
@@ -112,6 +94,8 @@ void draw() {
         e.update(player.position);
         e.display();
     }
+
+    player.display();
     
 }
 
@@ -120,10 +104,10 @@ void keyPressed() {
         keys[key] = true;
     }
     
-    if (enemies.size() == 0) {       
+    if (enemies.size() == 0 && spawners.size() == 0) {       
         if (keys['e'] || keys['E']) {
-          level++;
-          startWave(); //<>//
+            level++;
+            startWave(); //<>//
         }
     }
     

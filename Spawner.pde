@@ -12,7 +12,7 @@ class Spawner {
         switch(id) {
             case 1 :
             cooldown = 60;
-            for (int i = 0; i < 10;i++) enemiesMagazine.add(new MediumEnemy4(position.copy()));
+            for (int i = 0; i < 10;i++) enemiesMagazine.add(new MediumEnemy2(position.copy()));
             
             enemiesMagazine.add(new BasicEnemy3(position.copy()));
             // enemiesMagazine.add(new BasicEnemy1(position.copy()));

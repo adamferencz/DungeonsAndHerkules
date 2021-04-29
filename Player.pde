@@ -49,7 +49,11 @@ class Player {
     hpbar.run(hp, width/2, height-50, 1);
     fill(0);
     textSize(30);
-    text(selectedWeaponNumber, 10, height - 20);
+    text(selectedWeaponNumber, 10, height - 100);
+
+    selectedWeapon.display(80, height - 50);
+
+    //selected weapin image
   }
 
   void border() {

@@ -162,6 +162,66 @@ class BasicEnemy3 extends Enemy{
     } 
 }
 
+class MediumEnemy2 extends Enemy {
+  MediumEnemy2(PVector origin) {
+    super(origin);
+
+    d = 16;
+    damage = 3;
+    attackSpeed = 20;
+    attackCooldown = 0;
+    maxHP = 6;
+    nowHP = maxHP;
+    hpbar = new HpBar(maxHP);
+    speedLimit = 1;
+  }
+  Enemy clone() {
+    Enemy newEnemy = new Enemy(position.copy());
+    newEnemy.velocity = new PVector(random(-5, 5), random(-5, 5));
+    return newEnemy;
+  }
+  void gotDamage(float damage) {
+    nowHP -= damage;
+    if (nowHP < 0) {
+      alive = false;
+    }
+  }
+  void applyForce(PVector force) {
+    acc.add(force);
+  }
+  void update (PVector target) {
+    accToTarget = PVector.sub(target, position);
+    accToTarget.setMag(0.1);
+    applyForce(accToTarget);
+
+    velocity.add(acc);
+    velocity.limit(2);
+
+    position.add(velocity);
+    acc.mult(0);
+
+    if (attackCooldown < attackSpeed) {
+      attackCooldown++;
+    }
+  }
+  void display() {
+    stroke(0);
+    fill(c);
+    ellipse(position.x, position.y, d, d);
+    image(mediumEnemy2Image, position.x, position.y);
+    hpbar.run(nowHP, position.x - 5, position.y + 70, 4);
+  }
+  void hitPlayer(PVector pos, float d) {
+    float far = dist(position.x, position.y, pos.x, pos.y);
+    if (far < d / 2 + d / 2) {
+      if (attackCooldown == attackSpeed) {
+        player.hp -= damage;
+        attackCooldown = 0;
+      }
+    }
+  }
+}
+
 class MediumEnemy3 extends Enemy{
     int dashCooldown, dashTimer;
     MediumEnemy3(PVector origin) {
@@ -230,3 +290,4 @@ class MediumEnemy4 extends Enemy {
     return newEnemy;
   }
 }
+
