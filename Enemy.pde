@@ -68,8 +68,8 @@ class Enemy {
     
     void display() {
         
-        stroke(0);
-        fill(c);
+        stroke(0, 50);
+        fill(c, 20);
         ellipse(position.x, position.y, d, d);
         
         //image
@@ -291,3 +291,86 @@ class MediumEnemy4 extends Enemy {
   }
 }
 
+class BossEnemy1 extends Enemy{
+    int spellD, spellTimer, spellCooldown, spellDelTimer, spellDelCooldown;
+    float spellDamage;
+    PVector spellPosition;
+    boolean spellCreated, spellGrowing;
+    BossEnemy1(PVector origin){
+        super(origin);
+        position.x = width/2;
+        position.y = height/2;
+        velocity = new PVector(0, 0);
+        acc = new PVector(0, 0);
+        d = 200;
+        c = #FF2E4E;
+        damage = 25;
+        spellDamage = 0.259;
+        attackSpeed = 120;
+        attackCooldown = 0;
+        alive = true;
+        maxHP = 75;
+        nowHP = maxHP;
+        hpbar = new HpBar(maxHP);
+        speedLimit = 4.5;
+        friction = 0.95;
+        spellD = 125;
+        spellTimer = 0;
+        spellCooldown = 300;
+        spellDelTimer = 0;
+        spellDelCooldown = 360;
+        spellPosition = new PVector(random(0,width), random(0,height));
+        spellCreated = false;
+        spellGrowing = true;
+    }
+
+    void update(PVector target){
+        super.update(target);
+        if (spellCreated == true) {
+            if (spellGrowing == true) {
+                spellDelTimer++;
+                spellD = spellDelTimer; 
+
+                if (spellDelTimer >= spellDelCooldown) {
+                    spellGrowing = false;    
+                    
+                }
+            } else {
+                spellDelTimer--;
+                spellD = spellDelTimer;
+                if (spellD <= 0) {
+                    spellCreated = false;
+                }
+            }
+                damagePlayer();
+                displaySpells();
+        } else {
+            spellTimer++;
+            if (spellTimer >= spellCooldown) {
+                spellPosition = new PVector(random(0,width), random(0,height));
+                spellCreated = true;
+                spellTimer = 0;
+                spellGrowing = true;
+            }
+        }
+    }   
+
+    void displaySpells(){
+        fill(0,255,0);
+        ellipse(spellPosition.x,spellPosition.y, spellD, spellD);
+        fill(0); 
+    }
+
+    void damagePlayer(){
+        float d = dist(spellPosition.x, spellPosition.y, player.position.x, player.position.y);
+        if(d < spellD/2 + player.size/2) {
+            player.hp -= spellDamage;
+        }
+    }
+
+    void display() {
+        super.display();
+        //image
+        image(bossEnemy1Image, position.x, position.y);
+    }
+}

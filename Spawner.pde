@@ -3,45 +3,16 @@ class Spawner {
     ArrayList<Enemy> enemiesMagazine;
     int cooldown, timer;
     boolean empty;
-    Spawner(int id) {
+    PImage image;
+    Spawner() {
         position = new PVector(random(width),random(height));
         empty = false;
         cooldown = 60;
         timer = 0;
         enemiesMagazine = new ArrayList();
-        switch(id) {
-            case 1 :
-            cooldown = 60;
-            for (int i = 0; i < 10;i++) enemiesMagazine.add(new MediumEnemy2(position.copy()));
-            
-            enemiesMagazine.add(new BasicEnemy3(position.copy()));
-            // enemiesMagazine.add(new BasicEnemy1(position.copy()));
-            // enemiesMagazine.add(new BasicEnemy1(position.copy()));
-            // enemiesMagazine.add(new BasicEnemy1(position.copy()));
-            break;
-            case 2 :
-            cooldown = 20; 
-            addMoreEnemies(new BasicEnemy1(position.copy()), 10);
-            break;
-            case 3 :
-            addMoreEnemies(new BasicEnemy3(position.copy()), 5);
-            break;
-            case 4 :
-            addMoreEnemies(new BasicEnemy1(position.copy()), 5);
-            addMoreEnemies(new BasicEnemy3(position.copy()), 5);
-            break;
-            default:
-            cooldown = 30; 
-            addMoreEnemies(new Enemy(position.copy()), level);
-            break;
-        }
+        cooldown = 100;
+        image = basicSpawner2Image;
     }
-    
-    void addMoreEnemies(Enemy enemy, int count) {
-        for (int i = 0; i < count;i++) {
-            enemiesMagazine.add(enemy.clone());
-        }
-    }   
     
     void spawn() {
         timer++;
@@ -51,12 +22,32 @@ class Spawner {
                 enemies.add(enemiesMagazine.get(0));
                 enemiesMagazine.remove(0);
             } else {
-                empty = true;
+                if (enemies.size() == 0){
+                    empty = true;
+                }
             }          
         }
     }
     
     void display() {
-        rect(position.x, position.y, 100, 100);
+        image(image,position.x, position.y);
+    }
+}
+
+class PalmSpawner extends Spawner {
+    PalmSpawner(){
+        super();
+        cooldown = 60;
+        for (int i = 0; i < 5;i++) enemiesMagazine.add(new BasicEnemy1(position.copy()));
+        image = basicSpawner2Image;
+    }
+}
+
+class TreeHouseSpawner extends Spawner {
+    TreeHouseSpawner(){
+        super();
+        cooldown = 150;
+        for (int i = 0; i < 2;i++) enemiesMagazine.add(new BasicEnemy3(position.copy()));
+        image = basicSpawner3Image;
     }
 }

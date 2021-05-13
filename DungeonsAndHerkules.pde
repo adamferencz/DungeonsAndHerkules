@@ -16,6 +16,7 @@ PImage basicEnemy1Image, basicEnemy2Image, basicEnemy3Image;
 PImage mediumEnemy1Image, mediumEnemy2Image, mediumEnemy3Image, mediumEnemy4Image;
 PImage bossEnemy1Image, bossEnemy2Image, bossEnemy3Image, bossEnemy4Image;
 
+PImage basicSpawner1Image, basicSpawner2Image, basicSpawner3Image, mediumSpawner1Image,mediumSpawner2Image,mediumSpawner3Image, mediumSpawner4Image;
 
 PImage basicWeapon1Image,basicWeapon2Image,basicWeapon3Image,basicWeapon4Image,mediumWeapon1Image ,mediumWeapon2Image ,mediumWeapon3Image ,ultimateWeaponImage;    
 PImage basicAmmo1Image ,mediumAmmo1Image,basicAmmo2Image ,basicAmmo3Image;    
@@ -24,7 +25,7 @@ PImage petImage, petImage1;
 
 void setup() {
     size(1024, 720);
-    level = 0;
+    level = 2;
     loadImages();
     
     //objects
@@ -94,7 +95,7 @@ void draw() {
         e.update(player.position);
         e.display();
     }
-
+    
     player.display();
     
 }

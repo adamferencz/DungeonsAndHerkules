@@ -1,24 +1,28 @@
 void startWave() {
     switch(level) {
         case 1 : 
-        spawners.add(new Spawner(1));
+        spawners.add(new PalmSpawner());
         break;
         case 2 : 
-        spawners.add(new Spawner(2));
+        spawners.add(new PalmSpawner());
+        spawners.add(new PalmSpawner());
         break;
         case 3 : 
-        spawners.add(new Spawner(3));
+        spawners.add(new PalmSpawner());
+        spawners.add(new TreeHouseSpawner());
         break;
         case 4 : 
-        spawners.add(new Spawner(4));
+        spawners.add(new TreeHouseSpawner());
+        spawners.add(new TreeHouseSpawner());
+        spawners.add(new TreeHouseSpawner());
         break;
         case 5 : 
-        spawners.add(new Spawner(2));
-        spawners.add(new Spawner(3));
+        spawners.add(new Spawner());
+        spawners.add(new Spawner());
         break;
         default:
-        spawners.add(new Spawner(1));
-        spawners.add(new Spawner(1));
+        spawners.add(new Spawner());
+        spawners.add(new Spawner());
         break;
     }
 }
@@ -68,6 +72,19 @@ void loadImages(){
     //boss enemy
     petImage = loadImage("images\\data\\pet\\petFIVEleft1.png");
     
+
+
+    //spawners
+    basicSpawner1Image  =   loadImage("images\\data\\spawners\\spawnerBasicONE.png");
+    basicSpawner2Image  =   loadImage("images\\data\\spawners\\spawnerBasicTWO.png");
+    basicSpawner3Image  =   loadImage("images\\data\\spawners\\spawnerBasicTHREE.png");
+    mediumSpawner1Image =   loadImage("images\\data\\spawners\\spawnerMediumONE.png");
+    mediumSpawner2Image =   loadImage("images\\data\\spawners\\spawnerMediumTWO.png");
+    mediumSpawner3Image =   loadImage("images\\data\\spawners\\spawnerMediumTHREE.png");
+    mediumSpawner4Image =   loadImage("images\\data\\spawners\\spawnerMediumFOUR.png");
+
+
+
     //other
     bulletImage = loadImage("images\\data\\weapon\\ammo\\ammoTWOmed.png");
     petImage1 = loadImage("images\\data\\pet\\petFIVEsitting.png");
