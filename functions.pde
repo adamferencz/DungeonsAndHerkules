@@ -1,5 +1,5 @@
 void startWave() {
-    switch(level) {
+switch(level) {
         case 1 : 
         spawners.add(new PalmSpawner());
         break;
@@ -8,18 +8,22 @@ void startWave() {
         spawners.add(new PalmSpawner());
         break;
         case 3 : 
-        spawners.add(new PalmSpawner());
+        spawners.add(new TreeHouseSpawner());
         spawners.add(new TreeHouseSpawner());
         break;
         case 4 : 
-        spawners.add(new TreeHouseSpawner());
-        spawners.add(new TreeHouseSpawner());
-        spawners.add(new TreeHouseSpawner());
+        spawners.add(new Swamp());
+        spawners.add(new Swamp());
+        spawners.add(new Swamp());
         break;
         case 5 : 
-        spawners.add(new Spawner());
-        spawners.add(new Spawner());
+        spawners.add(new PalmSpawner());
+        spawners.add(new TreeHouseSpawner());
+        spawners.add(new Swamp());
+        
         break;
+        case 6 :
+        spawners.add(new LittleHole());
         default:
         spawners.add(new Spawner());
         spawners.add(new Spawner());

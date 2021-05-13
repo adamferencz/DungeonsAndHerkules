@@ -11,7 +11,7 @@ class Enemy {
     
     Enemy(PVector origin) {
         position = origin;
-        velocity = new PVector(random( - 5,5), random( - 5,5));
+        velocity = new PVector(random( -5,5), random( -5,5));
         acc = new PVector(0, 0);
         d = 16;
         c = #FF2E4E;
@@ -28,7 +28,7 @@ class Enemy {
     
     Enemy clone() {
         Enemy newEnemy = new Enemy(position.copy());
-        newEnemy.velocity = new PVector(random( - 5,5), random( - 5,5));
+        newEnemy.velocity = new PVector(random( -5,5), random( -5,5));
         return newEnemy;
     }
     
@@ -56,7 +56,7 @@ class Enemy {
         // Add the current speed to the location.
         position.add(velocity);
         acc.mult(0);
-
+        
         // Friction slowdown 
         velocity.mult(friction);
         
@@ -94,7 +94,7 @@ class BasicEnemy1 extends Enemy{
     
     BasicEnemy1(PVector origin) {
         super(origin);
-        velocity = new PVector(random( - 5,5), random( - 5,5));
+        velocity = new PVector(random( -5,5), random( -5,5));
         d = 50;
         damage = 1;
         attackSpeed = 30;
@@ -112,7 +112,7 @@ class BasicEnemy1 extends Enemy{
     
     BasicEnemy1 clone() {
         BasicEnemy1 newEnemy = new BasicEnemy1(position.copy());
-        newEnemy.velocity = new PVector(random( - 5,5), random( - 5,5));
+        newEnemy.velocity = new PVector(random( -5,5), random( -5,5));
         return newEnemy;
     }
 }
@@ -141,7 +141,7 @@ class BasicEnemy3 extends Enemy{
     
     BasicEnemy3 clone() {
         BasicEnemy3 newEnemy = new BasicEnemy3(position.copy());
-        newEnemy.velocity = new PVector(random(- 5,5), random(- 5,5));
+        newEnemy.velocity = new PVector(random( - 5,5), random( - 5,5));
         return newEnemy;
     }
     
@@ -154,7 +154,7 @@ class BasicEnemy3 extends Enemy{
         if (dashTimer > dashCooldown) {
             if (dash.mag() < 250) {
                 dashTimer = 0;
-                dash.setMag(speedLimit/2);
+                dash.setMag(speedLimit / 2);
                 velocity.add(dash);
                 position.add(velocity);
             } 
@@ -163,63 +163,63 @@ class BasicEnemy3 extends Enemy{
 }
 
 class MediumEnemy2 extends Enemy {
-  MediumEnemy2(PVector origin) {
-    super(origin);
-
-    d = 16;
-    damage = 3;
-    attackSpeed = 20;
-    attackCooldown = 0;
-    maxHP = 6;
-    nowHP = maxHP;
-    hpbar = new HpBar(maxHP);
-    speedLimit = 1;
-  }
-  Enemy clone() {
-    Enemy newEnemy = new Enemy(position.copy());
-    newEnemy.velocity = new PVector(random(-5, 5), random(-5, 5));
-    return newEnemy;
-  }
-  void gotDamage(float damage) {
-    nowHP -= damage;
-    if (nowHP < 0) {
-      alive = false;
-    }
-  }
-  void applyForce(PVector force) {
-    acc.add(force);
-  }
-  void update (PVector target) {
-    accToTarget = PVector.sub(target, position);
-    accToTarget.setMag(0.1);
-    applyForce(accToTarget);
-
-    velocity.add(acc);
-    velocity.limit(2);
-
-    position.add(velocity);
-    acc.mult(0);
-
-    if (attackCooldown < attackSpeed) {
-      attackCooldown++;
-    }
-  }
-  void display() {
-    stroke(0);
-    fill(c);
-    ellipse(position.x, position.y, d, d);
-    image(mediumEnemy2Image, position.x, position.y);
-    hpbar.run(nowHP, position.x - 5, position.y + 70, 4);
-  }
-  void hitPlayer(PVector pos, float d) {
-    float far = dist(position.x, position.y, pos.x, pos.y);
-    if (far < d / 2 + d / 2) {
-      if (attackCooldown == attackSpeed) {
-        player.hp -= damage;
+    MediumEnemy2(PVector origin) {
+        super(origin);
+        
+        d = 16;
+        damage = 3;
+        attackSpeed = 20;
         attackCooldown = 0;
-      }
+        maxHP = 6;
+        nowHP = maxHP;
+        hpbar = new HpBar(maxHP);
+        speedLimit = 1;
     }
-  }
+    Enemy clone() {
+        Enemy newEnemy = new Enemy(position.copy());
+        newEnemy.velocity = new PVector(random( - 5, 5), random( - 5, 5));
+        return newEnemy;
+    }
+    void gotDamage(float damage) {
+        nowHP -= damage;
+        if (nowHP < 0) {
+            alive = false;
+        }
+    }
+    void applyForce(PVector force) {
+        acc.add(force);
+    }
+    void update(PVector target) {
+        accToTarget = PVector.sub(target, position);
+        accToTarget.setMag(0.1);
+        applyForce(accToTarget);
+        
+        velocity.add(acc);
+        velocity.limit(2);
+        
+        position.add(velocity);
+        acc.mult(0);
+        
+        if (attackCooldown < attackSpeed) {
+            attackCooldown++;
+        }
+    }
+    void display() {
+        stroke(0);
+        fill(c);
+        ellipse(position.x, position.y, d, d);
+        image(mediumEnemy2Image, position.x, position.y);
+        hpbar.run(nowHP, position.x - 5, position.y + 70, 4);
+    }
+    void hitPlayer(PVector pos, float d) {
+        float far = dist(position.x, position.y, pos.x, pos.y);
+        if (far < d / 2 + d / 2) {
+           if (attackCooldown == attackSpeed) {
+                player.hp -= damage;
+                attackCooldown = 0;
+        }
+        }
+    }
 }
 
 class MediumEnemy3 extends Enemy{
@@ -227,9 +227,9 @@ class MediumEnemy3 extends Enemy{
     MediumEnemy3(PVector origin) {
         super(origin);
         // velocity = new PVector(random(-5,5), random(-5,5));
-         d = 25;
-       damage =9;
-      attackSpeed = 25;
+        d = 25;
+        damage = 9;
+        attackSpeed = 25;
         speedLimit = 40;
         dashCooldown = 26;
         //dashTimer = 0;
@@ -238,12 +238,12 @@ class MediumEnemy3 extends Enemy{
     void display() {
         super.display();
         //image
- image( mediumEnemy3Image , position.x, position.y);
+        image(mediumEnemy3Image , position.x, position.y);
     }
     
     MediumEnemy3 clone() {
         MediumEnemy3 newEnemy = new MediumEnemy3(position.copy());
-        newEnemy.velocity = new PVector(random(- 5,5), random(- 5,5));
+        newEnemy.velocity = new PVector(random( - 5,5), random( - 5,5));
         return newEnemy;
     }
     
@@ -252,11 +252,11 @@ class MediumEnemy3 extends Enemy{
         //get accToTarget
         
         PVector dash = PVector.sub(target, position);
-        dashTimer= dashTimer+2;
+        dashTimer = dashTimer + 2;
         if (dashTimer > dashCooldown) {
             if (dash.mag() < 250) {
                 dashTimer = 0;
-                dash.setMag(speedLimit/1.5);
+                dash.setMag(speedLimit / 1.5);
                 velocity.add(dash);
                 position.add(velocity);
             } 
@@ -265,30 +265,30 @@ class MediumEnemy3 extends Enemy{
 }
 
 class MediumEnemy4 extends Enemy {
-
-  MediumEnemy4(PVector origin) {
-    super(origin);
-    velocity = new PVector(random( - 5, 5), random( - 5, 5));
-    d = 50;
-    damage = 30;
-    attackSpeed = 30;
-    maxHP = 50;
-    nowHP = maxHP;
-    hpbar = new HpBar(maxHP);
-    speedLimit = 3;
-  }
-
-  void display() {      
-    super.display();
-    //image
-    image(mediumEnemy4Image, position.x, position.y);
-  }
-
-  BasicEnemy1 clone() {
-    BasicEnemy1 newEnemy = new BasicEnemy1(position.copy());
-    newEnemy.velocity = new PVector(random( - 5, 5), random( - 5, 5));
-    return newEnemy;
-  }
+    
+    MediumEnemy4(PVector origin) {
+        super(origin);
+        velocity = new PVector(random( -5, 5), random( -5, 5));
+        d = 50;
+        damage = 30;
+        attackSpeed = 30;
+        maxHP = 50;
+        nowHP = maxHP;
+        hpbar = new HpBar(maxHP);
+        speedLimit = 3;
+    }
+    
+    void display() {      
+        super.display();
+        //image
+        image(mediumEnemy4Image, position.x, position.y);
+    }
+    
+    BasicEnemy1 clone() {
+        BasicEnemy1 newEnemy = new BasicEnemy1(position.copy());
+        newEnemy.velocity = new PVector(random( -5, 5), random( -5, 5));
+        return newEnemy;
+    }
 }
 
 class BossEnemy1 extends Enemy{
@@ -296,10 +296,10 @@ class BossEnemy1 extends Enemy{
     float spellDamage;
     PVector spellPosition;
     boolean spellCreated, spellGrowing;
-    BossEnemy1(PVector origin){
+    BossEnemy1(PVector origin) {
         super(origin);
-        position.x = width/2;
-        position.y = height/2;
+        position.x = width / 2;
+        position.y = height / 2;
         velocity = new PVector(0, 0);
         acc = new PVector(0, 0);
         d = 200;
@@ -323,14 +323,14 @@ class BossEnemy1 extends Enemy{
         spellCreated = false;
         spellGrowing = true;
     }
-
-    void update(PVector target){
+    
+    void update(PVector target) {
         super.update(target);
         if (spellCreated == true) {
             if (spellGrowing == true) {
                 spellDelTimer++;
                 spellD = spellDelTimer; 
-
+                
                 if (spellDelTimer >= spellDelCooldown) {
                     spellGrowing = false;    
                     
@@ -342,8 +342,8 @@ class BossEnemy1 extends Enemy{
                     spellCreated = false;
                 }
             }
-                damagePlayer();
-                displaySpells();
+               damagePlayer();
+               displaySpells();
         } else {
             spellTimer++;
             if (spellTimer >= spellCooldown) {
@@ -354,23 +354,60 @@ class BossEnemy1 extends Enemy{
             }
         }
     }   
-
-    void displaySpells(){
+    
+    void displaySpells() {
         fill(0,255,0);
         ellipse(spellPosition.x,spellPosition.y, spellD, spellD);
         fill(0); 
     }
-
-    void damagePlayer(){
+    
+    void damagePlayer() {
         float d = dist(spellPosition.x, spellPosition.y, player.position.x, player.position.y);
-        if(d < spellD/2 + player.size/2) {
+        if (d < spellD / 2 + player.size / 2) {
             player.hp -= spellDamage;
         }
     }
-
+    
     void display() {
         super.display();
         //image
         image(bossEnemy1Image, position.x, position.y);
+    }
+}
+
+class BossEnemy2 extends Enemy {
+    float shootTimer;
+    BossEnemy2(PVector origin) {
+        super(origin);
+        damage = 2;
+        shootTimer = 0;
+        d = 50;
+        maxHP = 100;
+        nowHP = maxHP;
+        hpbar = new HpBar(maxHP);
+    }
+    
+    void display() {
+        super.display();
+        //image
+        ellipse(position.x, position.y, d, d);
+        image(bossEnemy2Image, position.x, position.y);
+    }
+    
+    BossEnemy2 clone() {
+        BossEnemy2 newEnemy = new BossEnemy2(position.copy());
+        newEnemy.velocity = new PVector(random( - 5, 5), random( - 5, 5));
+        return newEnemy;
+    }
+    
+    void update(PVector target) {
+        super.update(target);
+        
+        shootTimer++;
+        
+        if (shootTimer > 40) {
+            bulletsEnemy.add(new ToiletBellEnemy(position, 0));
+            shootTimer = 0;
+        }
     }
 }

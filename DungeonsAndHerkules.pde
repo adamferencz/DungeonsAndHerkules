@@ -5,6 +5,7 @@ int level;
 ArrayList<Spawner> spawners;
 ArrayList<Enemy> enemies;
 ArrayList <Bullet> bullets;
+ArrayList <Bullet> bulletsEnemy;
 Pet pet;
 PETanimation animation, animationR;
 
@@ -25,7 +26,7 @@ PImage petImage, petImage1;
 
 void setup() {
     size(1024, 720);
-    level = 2;
+    level = 0;
     loadImages();
     
     //objects
@@ -38,11 +39,19 @@ void setup() {
     spawners = new ArrayList<Spawner>();
     enemies = new ArrayList<Enemy>();
     bullets = new ArrayList <Bullet> ();
-    
+    bulletsEnemy = new ArrayList <Bullet> ();
 }
 
 void draw() {
     background(255);
+    
+    if (player.hp <= 0) {
+        background(255, 0, 0);
+        textSize(20);
+        fill(0);
+        text("LVL: " + level, 50, 50);
+        text("You are dead :( ... Press E to continue..", 50, 70);
+    }
     
     textSize(20);
     fill(0);
@@ -50,13 +59,14 @@ void draw() {
     if (enemies.size() == 0 && spawners.size() == 0) {
         text("Press E to continue..", 50, 70);
     }
+    
     imageMode(CENTER);
-    player.move();
     
+    if (player.hp > 0) player.move();
     
-    //pet.move();
-    //pet.killEnemy(); 
-    //pet.display();
+    pet.move();
+    pet.killEnemy(); 
+    pet.display();
     
     for (int i = bullets.size() - 1; i >= 0; i--) {
         Bullet b = bullets.get(i);
@@ -69,12 +79,26 @@ void draw() {
                 e.gotDamage(b.damage);
                 b.onHit();
                 bullets.remove(i);//fixme for toilet bell
-                if (e.alive == false) enemies.remove(j);
                 break;
             }
+            if (e.alive == false) enemies.remove(j);
         }
         if (b.despawn()) {
             bullets.remove(i);
+        }
+    }
+    
+    for (int i = bulletsEnemy.size() - 1; i >= 0; i--) {
+        Bullet b = bulletsEnemy.get(i);
+        b.move();
+        b.display(); 
+        if (b.hit(player.position, player.size)) {
+            player.gotDamage(b.damage);
+            b.onHit();
+            bulletsEnemy.remove(i);//fixme for toilet bell
+        }
+        if (b.despawn()) {
+            bulletsEnemy.remove(i);
         }
     }
     
@@ -105,13 +129,23 @@ void keyPressed() {
         keys[key] = true;
     }
     
+    if (keys['e'] || keys['E']) {
+        if (player.hp <= 0) {
+            level = 0;
+            player.hp = 100;
+        }
+    }
+    
     if (enemies.size() == 0 && spawners.size() == 0) {       
-        if (keys['e'] || keys['E']) {
+        if (keys['e'] || keys['E']) {       
             level++;
             startWave(); //<>//
         }
     }
     
+    if (key == 'q' || key == 'Q') {
+        player.sitPet();
+    }
 }
 
 void keyReleased() {

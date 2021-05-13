@@ -6,6 +6,7 @@ class Pet {
   float size;
   float range;
   PVector target;
+  boolean sit;
 
 
   Pet() {
@@ -13,6 +14,7 @@ class Pet {
     velocity = new PVector(5, 5);
     acc = new PVector(0, 0);
     range = 200;
+    sit = false;
   }
 
   void applyForce(PVector force) {
@@ -40,7 +42,7 @@ class Pet {
       Enemy e = enemies.get(i);
       float d = dist(e.position.x, e.position.y, position.x, position.y);
       if (d<e.d+size) {
-        enemies.remove(i);
+        e.gotDamage(1);
         break;
       }
     }
@@ -49,12 +51,14 @@ class Pet {
 
   void move() {
     //detectEnemy();
+
     Enemy detected = detectEnemy();
     if (detected==null) {
       target = player.position;
     } else {
       target = detected.position;
     }
+
 
     acc = PVector.sub(target, position);
     acc.normalize();
@@ -72,6 +76,11 @@ class Pet {
     float p = dist(player.position.x, player.position.y, position.x, position.y);
     if (p < 130 && enemies.size() < 1) {
     } else {
+
+      if (sit) {
+        velocity.set(0, 0);
+      }
+
       position.add(velocity);
       acc.mult(0);
     }
@@ -81,7 +90,9 @@ class Pet {
     noFill();
 
     float p = dist(player.position.x, player.position.y, position.x, position.y);
-    if (p < 130 && enemies.size() < 1) { 
+    if (sit) {
+      image(petImage1, position.x, position.y);
+    } else if (p < 130 && enemies.size() < 1) { 
       //circle(position.x, position.y, size);
       image(petImage1, position.x, position.y);
     } else {

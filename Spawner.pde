@@ -38,7 +38,8 @@ class PalmSpawner extends Spawner {
     PalmSpawner(){
         super();
         cooldown = 60;
-        for (int i = 0; i < 5;i++) enemiesMagazine.add(new BasicEnemy1(position.copy()));
+         enemiesMagazine.add(new BossEnemy2(position.copy()));
+        // for (int i = 0; i < 5;i++) enemiesMagazine.add(new BasicEnemy1(position.copy()));
         image = basicSpawner2Image;
     }
 }
@@ -50,4 +51,29 @@ class TreeHouseSpawner extends Spawner {
         for (int i = 0; i < 2;i++) enemiesMagazine.add(new BasicEnemy3(position.copy()));
         image = basicSpawner3Image;
     }
+}
+
+class Swamp extends Spawner {
+  Swamp() {
+    super();
+    cooldown = 120;
+    for (int i = 0; i < 3; i++) enemiesMagazine.add(new MediumEnemy2(position.copy()));
+    image = mediumSpawner2Image;
+  }
+}
+class Hole extends Spawner {
+  Hole() {
+    super();
+    cooldown = 60;
+    for (int i = 0; i < 5; i++) enemiesMagazine.add(new MediumEnemy4(position.copy()));
+    image = mediumSpawner3Image;
+  }
+}
+class LittleHole extends Spawner {
+  LittleHole() {
+    super();
+    cooldown = 200;
+    for (int i = 0; i < 10; i++) enemiesMagazine.add(new MediumEnemy2(position.copy())); //kombinace vsech uz pouzitych
+    image = mediumSpawner3Image;
+  }
 }

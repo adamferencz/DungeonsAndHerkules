@@ -18,7 +18,8 @@ class Bullet {
 
 
   void display() {
-    fill(0, 255, 255); 
+    fill(100, 100, 100);
+    stroke(0);
     ellipse(position.x, position.y, d, d);
 
     PVector zero = new PVector(-1, 0);
@@ -61,6 +62,36 @@ class Bullet {
 class ToiletBell extends Bullet {
   ToiletBell(PVector pos, float a) {
     super(pos, a);
+  }
+  void display() {
+    PVector zero = new PVector(-1, 0);
+    float an = PVector.angleBetween(velocity, zero); 
+    push();
+    translate(position.x, position.y);
+    if (velocity.y < 0) rotate(an);
+    if (velocity.y > 0) rotate(-an);
+    if (velocity.y == 0 && velocity.x > 0) {
+      rotate(PI);
+    }
+    image(bulletImage, 0, 0);
+    pop();
+  }
+}
+
+class ToiletBellEnemy extends Bullet {
+  ToiletBellEnemy(PVector pos, float a) {
+    super(pos, a);
+    d = 10; 
+    angel = a;
+    position = new PVector(pos.x, pos.y);
+    mouse = new PVector(player.position.x, player.position.y);
+
+
+    a = map(a, 0, 360, 0, TWO_PI);
+    velocity = PVector.sub(mouse, position);
+    velocity.rotate(a);
+    velocity.setMag(10);
+    damage = 20;
   }
   void display() {
     PVector zero = new PVector(-1, 0);
