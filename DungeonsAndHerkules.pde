@@ -8,6 +8,8 @@ ArrayList <Bullet> bullets;
 ArrayList <Bullet> bulletsEnemy;
 Pet pet;
 PETanimation animation, animationR;
+AllItems ai;
+boolean isWeaponInHand;
 
 
 
@@ -19,7 +21,7 @@ PImage bossEnemy1Image, bossEnemy2Image, bossEnemy3Image, bossEnemy4Image;
 
 PImage basicSpawner1Image, basicSpawner2Image, basicSpawner3Image, mediumSpawner1Image,mediumSpawner2Image,mediumSpawner3Image, mediumSpawner4Image;
 
-PImage basicWeapon1Image,basicWeapon2Image,basicWeapon3Image,basicWeapon4Image,mediumWeapon1Image ,mediumWeapon2Image ,mediumWeapon3Image ,ultimateWeaponImage;    
+PImage basicWeapon1Image,basicWeapon2Image,basicWeapon3Image,basicWeapon4Image,mediumWeapon1Image ,mediumWeapon2Image ,mediumWeapon3Image , mediumWeapon4Image,ultimateWeaponImage;    
 PImage basicAmmo1Image ,mediumAmmo1Image,basicAmmo2Image ,basicAmmo3Image;    
 PImage mediumShrapnel1Image  ,mediumShrapnel2Image  ,mediumShrapnel3Image  ,mediumShrapnel4Image  ,ultimateShrapnel1Image,ultimateShrapnel2Image,ultimateShrapnel3Image;
 PImage petImage, petImage1;
@@ -40,6 +42,8 @@ void setup() {
     enemies = new ArrayList<Enemy>();
     bullets = new ArrayList <Bullet> ();
     bulletsEnemy = new ArrayList <Bullet> ();
+    ai = new AllItems();
+    isWeaponInHand = true;
 }
 
 void draw() {
@@ -62,8 +66,10 @@ void draw() {
     
     imageMode(CENTER);
     
-    if (player.hp > 0) player.move();
+    if (player.hp > 0) player.run();
     
+    ai.run();
+
     pet.move();
     pet.killEnemy(); 
     pet.display();
@@ -118,6 +124,7 @@ void draw() {
         e.hitPlayer(player.position, player.size);
         e.update(player.position);
         e.display();
+        if (e.alive == false) enemies.remove(i);
     }
     
     player.display();

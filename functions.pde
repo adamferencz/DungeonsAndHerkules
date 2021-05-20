@@ -57,7 +57,8 @@ void loadImages(){
     basicWeapon4Image = loadImage("images\\data\\weapon\\basic\\weaponFOUR.png");
     mediumWeapon1Image = loadImage("images\\data\\weapon\\medium\\weaponONEmed.png");
     mediumWeapon2Image = loadImage("images\\data\\weapon\\medium\\weaponTWOmed.png");
-    mediumWeapon3Image = loadImage("images\\data\\weapon\\medium\\weaponTHREEmed.png");
+    // mediumWeapon3Image = loadImage("images\\data\\weapon\\medium\\weaponTHREEmed.png");
+    mediumWeapon4Image = loadImage("images\\data\\weapon\\medium\\weaponFOURmed.png");
     ultimateWeaponImage = loadImage("images\\data\\weapon\\Ultimate\\weaponONE.png");
     
     basicAmmo1Image = loadImage("images\\data\\weapon\\ammo\\ammoONEbas.png");

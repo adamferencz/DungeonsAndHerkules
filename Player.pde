@@ -15,17 +15,26 @@ class Player {
         hp = 100;
         hpbar = new HpBar(hp);
         weapons = new ArrayList<Weapon>();
-        weapons.add(new Weapon());
-        weapons.add(new Shotgun());
-        weapons.add(new ToiletBellGun());
-        weapons.add(new GrenadeLauncher());
+        weapons.add(new BananaRevolver());
+        weapons.add(new SPDDiscGun());
+        // weapons.add(new ToiletBellGun());
+        // weapons.add(new GrenadeLauncher());
         selectedWeaponNumber = 0;
         selectedWeapon = weapons.get(selectedWeaponNumber);
         alive = true;
         saySitTimer = 0;
         saySit = false;
         sitStand = true;
+        speed = 3;
         
+}
+    
+    void items() {
+        if (turbo) {
+            speed = 6;
+        } else {
+            speed = 3;
+        }
     }
     
     void sitPet() {
@@ -93,18 +102,23 @@ class Player {
         }
     }
     
+    void run(){
+        items();
+        move();
+    }
+
     void move() {
         if (keys['a'] || keys['A']) { 
-            position.add(new PVector( -3, 0));
+            position.add(new PVector( -speed, 0));
         }
         if (keys['d'] || keys['D']) { 
-            position.add(new PVector(3, 0));
+            position.add(new PVector(speed, 0));
         }
         if (keys['w'] || keys['W']) {     
-            position.add(new PVector(0, -3));
+            position.add(new PVector(0, -speed));
         }
         if (keys['s'] || keys['S']) {
-            position.add(new PVector(0, 3));
+            position.add(new PVector(0, speed));
         }
         border();
         if (saySit) {
@@ -125,5 +139,12 @@ class Player {
     
     void shoot() {
         selectedWeapon.shoot();
+        //println( selectedWeapon.getClass().getName() == selectedWeapon.getClass().getName());
+        if (selectedWeapon.ammo <= 0) {
+            weapons.remove(selectedWeaponNumber);
+            if (selectedWeaponNumber > weapons.size() - 1) selectedWeaponNumber = 0;
+            changeGun(1);
+        }
     }
 }
+    
