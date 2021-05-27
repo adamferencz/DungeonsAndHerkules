@@ -69,10 +69,11 @@ class Hole extends Spawner {
     image = mediumSpawner3Image;
   }
 }
+
 class LittleHole extends Spawner {
   LittleHole() {
     super();
-    cooldown = 200;
+    cooldown = 20;
     for (int i = 0; i < 10; i++) enemiesMagazine.add(new MediumEnemy2(position.copy())); //kombinace vsech uz pouzitych
     image = mediumSpawner3Image;
   }

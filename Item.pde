@@ -16,8 +16,7 @@ class Item {
 
   void display() {
     if (!grab) {
-      fill(0, 255, 255); 
-      ellipse(pos.x, pos.y, d, d);
+      image(effect,pos.x, pos.y);
     }
   }
 
@@ -60,8 +59,7 @@ class HealItem extends Item {
 
   void display() {
     if (!grab) {
-      fill(0, 0, 255); 
-      ellipse(pos.x, pos.y, d, d);
+      image(heal,pos.x, pos.y);
     }
   }
 

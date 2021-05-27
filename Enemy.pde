@@ -162,11 +162,12 @@ class BasicEnemy3 extends Enemy{
     } 
 }
 
+//zeleny velka hlava
 class MediumEnemy2 extends Enemy {
     MediumEnemy2(PVector origin) {
         super(origin);
         
-        d = 16;
+        d = 150;
         damage = 3;
         attackSpeed = 20;
         attackCooldown = 0;
@@ -221,6 +222,7 @@ class MediumEnemy2 extends Enemy {
         }
     }
 }
+
 
 class MediumEnemy3 extends Enemy{
     int dashCooldown, dashTimer;
@@ -381,7 +383,7 @@ class BossEnemy2 extends Enemy {
         super(origin);
         damage = 2;
         shootTimer = 0;
-        d = 50;
+        d = 150;
         maxHP = 100;
         nowHP = maxHP;
         hpbar = new HpBar(maxHP);

@@ -13,7 +13,7 @@ class Pet {
     position = new PVector(550, 400);
     velocity = new PVector(5, 5);
     acc = new PVector(0, 0);
-    range = 200;
+    range = 400;
     sit = false;
   }
 

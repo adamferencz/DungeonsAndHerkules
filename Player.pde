@@ -25,15 +25,15 @@ class Player {
         saySitTimer = 0;
         saySit = false;
         sitStand = true;
-        speed = 3;
+        speed = 5;
         
 }
     
     void items() {
         if (turbo) {
-            speed = 6;
+            speed = 9;
         } else {
-            speed = 3;
+            speed = 5;
         }
     }
     
@@ -65,7 +65,11 @@ class Player {
         circle(position.x, position.y, size);
         
         //image
-        image(playerImage, position.x, position.y);
+         if (alive == false){
+          image(mediumEnemy3Image, position.x, position.y);
+        }else {
+           image(player1Image, position.x, position.y);
+        }
         
         hpbar.run(hp, width / 2, height - 50, 1);
         fill(0);

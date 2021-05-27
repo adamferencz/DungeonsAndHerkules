@@ -10,11 +10,12 @@ Pet pet;
 PETanimation animation, animationR;
 AllItems ai;
 boolean isWeaponInHand;
+int secsToStart, startTimer;
 
 
 
 boolean[] keys = new boolean[128];
-PImage playerImage, bulletImage;
+PImage playerImage, player1Image, player3Image, playerImageH, player1ImageH, player3ImageH, bulletImage;
 PImage basicEnemy1Image, basicEnemy2Image, basicEnemy3Image;
 PImage mediumEnemy1Image, mediumEnemy2Image, mediumEnemy3Image, mediumEnemy4Image;
 PImage bossEnemy1Image, bossEnemy2Image, bossEnemy3Image, bossEnemy4Image;
@@ -26,9 +27,14 @@ PImage basicAmmo1Image ,mediumAmmo1Image,basicAmmo2Image ,basicAmmo3Image;
 PImage mediumShrapnel1Image  ,mediumShrapnel2Image  ,mediumShrapnel3Image  ,mediumShrapnel4Image  ,ultimateShrapnel1Image,ultimateShrapnel2Image,ultimateShrapnel3Image;
 PImage petImage, petImage1;
 
+
+PImage heal, shield, effect;
+
+
 void setup() {
-    size(1024, 720);
-    level = 0;
+    // size(1024, 720);
+    fullScreen();
+    level = 6;
     loadImages();
     
     //objects
@@ -59,10 +65,26 @@ void draw() {
     
     textSize(20);
     fill(0);
-    text("LVL: " + level, 50, 50);
+    text("FPS: " + int(frameRate) + " - LVL: " + level, 50, 50);
+
     if (enemies.size() == 0 && spawners.size() == 0) {
-        text("Press E to continue..", 50, 70);
+    if (player.hp <= 0) {
+      
+    }else{
+    startTimer ++;
+    if (startTimer >= 60) {
+      startTimer = 0;
+      secsToStart --;
+      if (secsToStart <= 0) {
+        level++;
+        startWave();
+        secsToStart = 5;
+        startTimer = 0;
+      }
     }
+    text("Start in " + secsToStart + " or you can press E to continue.", 50, 70);
+    }
+  }
     
     imageMode(CENTER);
     

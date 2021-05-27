@@ -25,15 +25,48 @@ switch(level) {
         case 6 :
         spawners.add(new LittleHole());
         default:
-        spawners.add(new Spawner());
-        spawners.add(new Spawner());
+        createSpawners();
         break;
     }
+}
+
+void createSpawners() {
+  int levelM = level-2;
+  int p = round(levelM/7);
+  int t = round(levelM/6);
+  int s = round((levelM+2)/6);
+  int h = round(levelM/5);
+  int l = round((levelM+2)/10);
+
+  for (int i = 0; i < p; i++) {
+    spawners.add(new PalmSpawner());
+  }
+
+  for (int i = 0; i < t; i++) {
+    spawners.add(new TreeHouseSpawner());
+  }
+
+  for (int i = 0; i < s; i++) {
+    spawners.add(new Swamp());
+  }
+
+  for (int i = 0; i < h; i++) {
+    spawners.add(new Hole());
+  }
+
+  for (int i = 0; i < l; i++) {
+    spawners.add(new LittleHole());
+  }
 }
 
 void loadImages(){
     //player
     playerImage = loadImage("images\\data\\player\\playerTWOdown.png");
+    player1Image = loadImage("images\\data\\player\\playerONEdown.png");
+    player3Image = loadImage("images\\data\\player\\playerTHREEdown.png");
+    playerImageH = loadImage("images\\data\\player\\playerTWOdownRED.png");
+    player1ImageH = loadImage("images\\data\\player\\playerONEdownRED.png");
+    player3ImageH = loadImage("images\\data\\player\\playerTHREEdownRED.png");
     
     //basic enemy
     basicEnemy1Image = loadImage("images\\data\\enemy\\basic\\enemyONE.png");
@@ -93,4 +126,9 @@ void loadImages(){
     //other
     bulletImage = loadImage("images\\data\\weapon\\ammo\\ammoTWOmed.png");
     petImage1 = loadImage("images\\data\\pet\\petFIVEsitting.png");
+
+    //items
+    heal = loadImage("images\\data\\ui\\bigheal.png");
+    shield = loadImage("images\\data\\ui\\bigshield.png");
+    effect = loadImage("images\\data\\ui\\effectheal.png");
 }
