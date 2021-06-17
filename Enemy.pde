@@ -167,8 +167,8 @@ class MediumEnemy2 extends Enemy {
     MediumEnemy2(PVector origin) {
         super(origin);
         
-        d = 150;
-        damage = 3;
+        d = 100;
+        damage = 4;
         attackSpeed = 20;
         attackCooldown = 0;
         maxHP = 6;
@@ -207,7 +207,7 @@ class MediumEnemy2 extends Enemy {
     }
     void display() {
         stroke(0);
-        fill(c);
+        fill(c, 20);
         ellipse(position.x, position.y, d, d);
         image(mediumEnemy2Image, position.x, position.y);
         hpbar.run(nowHP, position.x - 5, position.y + 70, 4);
@@ -230,7 +230,7 @@ class MediumEnemy3 extends Enemy{
         super(origin);
         // velocity = new PVector(random(-5,5), random(-5,5));
         d = 25;
-        damage = 9;
+        damage = 7;
         attackSpeed = 25;
         speedLimit = 40;
         dashCooldown = 26;
@@ -272,9 +272,9 @@ class MediumEnemy4 extends Enemy {
         super(origin);
         velocity = new PVector(random( -5, 5), random( -5, 5));
         d = 50;
-        damage = 30;
+        damage = 10;
         attackSpeed = 30;
-        maxHP = 50;
+        maxHP = 40;
         nowHP = maxHP;
         hpbar = new HpBar(maxHP);
         speedLimit = 3;

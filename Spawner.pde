@@ -65,7 +65,7 @@ class Hole extends Spawner {
   Hole() {
     super();
     cooldown = 60;
-    for (int i = 0; i < 5; i++) enemiesMagazine.add(new MediumEnemy4(position.copy()));
+    for (int i = 0; i < random(3,5); i++) enemiesMagazine.add(new MediumEnemy4(position.copy()));
     image = mediumSpawner3Image;
   }
 }
@@ -76,5 +76,14 @@ class LittleHole extends Spawner {
     cooldown = 20;
     for (int i = 0; i < 10; i++) enemiesMagazine.add(new MediumEnemy2(position.copy())); //kombinace vsech uz pouzitych
     image = mediumSpawner3Image;
+  }
+}
+
+class MagicDoor extends Spawner {
+  MagicDoor() {
+    super();
+    cooldown = 40;
+    for (int i = 0; i < random(1,3); i++) enemiesMagazine.add(new BossEnemy1(position.copy()));
+    image = mediumSpawner1Image;
   }
 }

@@ -1,29 +1,32 @@
 void startWave() {
 switch(level) {
         case 1 : 
-        spawners.add(new PalmSpawner());
+        spawners.add(new TreeHouseSpawner());
+        spawners.add(new TreeHouseSpawner());
         break;
         case 2 : 
-        spawners.add(new PalmSpawner());
-        spawners.add(new PalmSpawner());
+        spawners.add(new Swamp());
+        spawners.add(new Swamp());
         break;
         case 3 : 
-        spawners.add(new TreeHouseSpawner());
+        spawners.add(new Hole());
         spawners.add(new TreeHouseSpawner());
         break;
         case 4 : 
-        spawners.add(new Swamp());
-        spawners.add(new Swamp());
+        spawners.add(new Hole());
+        spawners.add(new TreeHouseSpawner());
         spawners.add(new Swamp());
         break;
         case 5 : 
         spawners.add(new PalmSpawner());
-        spawners.add(new TreeHouseSpawner());
-        spawners.add(new Swamp());
-        
+        spawners.add(new Hole());
+        spawners.add(new LittleHole());
         break;
         case 6 :
-        spawners.add(new LittleHole());
+        spawners.add(new Hole());
+        spawners.add(new MagicDoor());
+        spawners.add(new TreeHouseSpawner());
+        spawners.add(new TreeHouseSpawner());
         default:
         createSpawners();
         break;
@@ -37,6 +40,7 @@ void createSpawners() {
   int s = round((levelM+2)/6);
   int h = round(levelM/5);
   int l = round((levelM+2)/10);
+  int m = round(levelM/7);
 
   for (int i = 0; i < p; i++) {
     spawners.add(new PalmSpawner());
@@ -57,6 +61,9 @@ void createSpawners() {
   for (int i = 0; i < l; i++) {
     spawners.add(new LittleHole());
   }
+  for (int i = 0; i < m; i++) {
+    spawners.add(new MagicDoor());
+  }
 }
 
 void loadImages(){
@@ -67,6 +74,13 @@ void loadImages(){
     playerImageH = loadImage("images\\data\\player\\playerTWOdownRED.png");
     player1ImageH = loadImage("images\\data\\player\\playerONEdownRED.png");
     player3ImageH = loadImage("images\\data\\player\\playerTHREEdownRED.png");
+    
+    //other players
+    player4Image = loadImage("images\\data\\pet\\petONEleft.png"); //rock
+    player5Image = loadImage("images\\data\\pet\\petFOUR.png"); // uwu
+    player6Image = loadImage("images\\data\\pet\\petTWOright.png"); //blackpotato
+    player7Image = loadImage("images\\data\\enemy\\boss\\enemyTHREE.png"); //impostor
+    player8Image = loadImage("images\\data\\enemy\\medium\\enemyONE.png");
     
     //basic enemy
     basicEnemy1Image = loadImage("images\\data\\enemy\\basic\\enemyONE.png");

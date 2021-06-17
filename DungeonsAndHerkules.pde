@@ -11,6 +11,7 @@ PETanimation animation, animationR;
 AllItems ai;
 boolean isWeaponInHand;
 int secsToStart, startTimer;
+int selectedcharacter;
 
 
 
@@ -26,7 +27,7 @@ PImage basicWeapon1Image,basicWeapon2Image,basicWeapon3Image,basicWeapon4Image,m
 PImage basicAmmo1Image ,mediumAmmo1Image,basicAmmo2Image ,basicAmmo3Image;    
 PImage mediumShrapnel1Image  ,mediumShrapnel2Image  ,mediumShrapnel3Image  ,mediumShrapnel4Image  ,ultimateShrapnel1Image,ultimateShrapnel2Image,ultimateShrapnel3Image;
 PImage petImage, petImage1;
-
+PImage player4Image, player5Image, player6Image, player7Image, player8Image;
 
 PImage heal, shield, effect;
 
@@ -34,7 +35,7 @@ PImage heal, shield, effect;
 void setup() {
     // size(1024, 720);
     fullScreen();
-    level = 6;
+    level = 0;
     loadImages();
     
     //objects
@@ -50,6 +51,7 @@ void setup() {
     bulletsEnemy = new ArrayList <Bullet> ();
     ai = new AllItems();
     isWeaponInHand = true;
+    selectedcharacter = 0;
 }
 
 void draw() {
@@ -62,10 +64,6 @@ void draw() {
         text("LVL: " + level, 50, 50);
         text("You are dead :( ... Press E to continue..", 50, 70);
     }
-    
-    textSize(20);
-    fill(0);
-    text("FPS: " + int(frameRate) + " - LVL: " + level, 50, 50);
 
     if (enemies.size() == 0 && spawners.size() == 0) {
     if (player.hp <= 0) {
@@ -151,6 +149,10 @@ void draw() {
     
     player.display();
     
+    textSize(20);
+    fill(0);
+    text("FPS: " + int(frameRate) + " - LVL: " + level, 50, 50);
+    
 }
 
 void keyPressed() {
@@ -175,6 +177,41 @@ void keyPressed() {
     if (key == 'q' || key == 'Q') {
         player.sitPet();
     }
+
+    if (key == 'o' || key == 'O') {
+        selectedcharacter ++;
+        if (selectedcharacter > 7) {
+         selectedcharacter = 0;
+         }
+        switch(selectedcharacter) {
+        case 0:
+        player.image = playerImage;
+        break;
+        case 1:
+        player.image = player1Image;
+        break;
+        case 2:
+        player.image= player3Image;
+        break;
+        case 3:
+        player.image = player4Image;
+        break;
+        case 4:
+        player.image = player5Image;
+        break;
+        case 5:
+        player.image = player6Image;
+        break;
+        case 6:
+        player.image = player7Image;
+        break;
+        case 7:
+        player.image= player8Image;
+        break;  
+        }   
+    }
+
+
 }
 
 void keyReleased() {

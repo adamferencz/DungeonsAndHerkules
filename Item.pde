@@ -96,9 +96,9 @@ class Gun1Item extends Item {
       case 2 : 
         image(mediumWeapon2Image, pos.x,pos.y);
         break;
-      // case 3 : 
-      //   image(basicWeapon3Image, pos.x,pos.y);
-      //   break;
+      case 3 : 
+        image(mediumWeapon4Image, pos.x,pos.y);
+        break;
       
       }
      // ellipse(pos.x, pos.y, d, d);
@@ -120,9 +120,9 @@ class Gun1Item extends Item {
     case 2 : 
       player.weapons.add(new ToiletBellGun());
       break;
-    // case 3 : 
-    //   player.weapons.add(new GrenadeLauncher());
-    //   break;
+    case 3 : 
+      player.weapons.add(new SPDDiscGun());
+      break;
     }
 
     println("Toilet");
@@ -134,7 +134,7 @@ class Gun1Item extends Item {
 class AllItems {
   ArrayList<Item> items;
   boolean [] gun;
-  int countGun = 3;
+  int countGun = 4;
 
   AllItems() {
     items = new ArrayList <Item> ();
@@ -158,7 +158,7 @@ class AllItems {
       if (it.died) {
         items.remove(i);
 
-        int randGun = round(random(0, countGun-1));
+        int randGun = round(random(0, countGun-0.5));
         int randItem = round(random(0, 2));
 
         //if (randItem == 0) {

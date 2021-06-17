@@ -7,6 +7,7 @@ class Player {
     HpBar hpbar;
     boolean saySit, sitStand, alive, turbo;
     float saySitTimer, speed;
+    PImage image;
     
     Player() {
         position = new PVector(width / 2, height / 2);
@@ -16,7 +17,7 @@ class Player {
         hpbar = new HpBar(hp);
         weapons = new ArrayList<Weapon>();
         weapons.add(new BananaRevolver());
-        weapons.add(new SPDDiscGun());
+        // weapons.add(new SPDDiscGun());
         // weapons.add(new ToiletBellGun());
         // weapons.add(new GrenadeLauncher());
         selectedWeaponNumber = 0;
@@ -26,6 +27,7 @@ class Player {
         saySit = false;
         sitStand = true;
         speed = 5;
+        image = playerImage;
         
 }
     
@@ -68,7 +70,7 @@ class Player {
          if (alive == false){
           image(mediumEnemy3Image, position.x, position.y);
         }else {
-           image(player1Image, position.x, position.y);
+           image(image, position.x, position.y);
         }
         
         hpbar.run(hp, width / 2, height - 50, 1);

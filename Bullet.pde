@@ -146,7 +146,7 @@ class SPDDisk extends Bullet {
     Enemy detectEnemy() {
         int range = width;
         float minDist = width / 2;
-        damage= 20 ;
+        damage= 1 ;
         Enemy winner = null;
         for (Enemy enemy : enemies) {
             float d = dist(enemy.position.x, enemy.position.y, position.x, position.y);
